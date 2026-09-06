@@ -39,6 +39,11 @@
 
   const dynamicEn = {
     projects: [
+      ["Co-researcher", "[Ministry of Education] Development of an AI-Based Teaching and Learning Model to Enhance Learners' Thinking Skills"],
+      ["Principal investigator", "[Ministry of Food and Drug Safety] Operation of In-Service Training for Teachers of the Approved High School Subject Food Safety and Health"],
+      ["Principal investigator", "[Ministry of Unification] Operation of the Leading University Program for Unification Education"],
+      ["Principal investigator", "[Ministry of Education · National Research Foundation of Korea] Operation of the Domestic Academic Journal Support Program for Teacher Education"],
+      ["Principal investigator", "[Ministry of Unification] Operation of the Leading University Program for Unification Education"],
       ["Principal investigator", "[Ministry of Food and Drug Safety] Publication of the approved high school textbook Food Safety and Health and operation of teacher training"],
       ["Co-researcher", "Revision of the high school textbook Food Safety and Health"],
       ["Principal investigator", "[Ministry of Food and Drug Safety] Development of food safety and health educational content and operation of a training course"],
@@ -46,8 +51,8 @@
       ["Principal investigator", "[Ministry of Food and Drug Safety] Development of a supplementary Food Safety and Health textbook and operation of a training course"],
       ["Principal investigator", "[Ministry of Food and Drug Safety] Operation of a food safety and health curriculum for adolescents"],
       ["Co-researcher", "[Ministry of Food and Drug Safety] Development of educational materials for healthy and safe eating among adolescents"],
-      ["Principal investigator", "[KOFAC & Ministry of Education] Development of a teacher training program for competency in process-centered assessment (Technology and Home Economics)"],
-      ["Principal investigator", "[KNUE] Exploring directions for home economics education in the era of single-person households"]
+      ["Principal investigator", "[KNUE] Exploring directions for home economics education in the era of single-person households"],
+      ["Principal investigator", "[KOFAC & Ministry of Education] Development of a teacher training program for competency in process-centered assessment (Technology and Home Economics)"]
     ],
     career: [
       ["The Journal of Korean Teacher Education", "Editor-in-Chief"], ["Korean Home Economics Association", "Vice President"], ["Korean Home Economics Education Association", "Academic Committee Chair"], ["Korea National University of Education", "Associate Professor"], ["Korean Home Economics Association", "General Affairs Committee Chair"], ["Korean Home Economics Education Association", "Executive Director for General Affairs"], ["Korea National University of Education", "Assistant Professor"], ["Gyeonggi-do Icheon Office of Education", "Education Supervisor"], ["Six secondary schools in Gyeonggi-do", "Teacher (Master Teacher)"]
@@ -231,9 +236,9 @@
   const renderProjects = () => {
     projectList.replaceChildren(...data.projects.map((item, index) => {
       const article = make("article", "project-item");
-      const en = dynamicEn.projects[index];
-      article.append(make("div", "project-role", lang === "en" ? en[0] : item.role));
-      article.append(make("h3", "", lang === "en" ? en[1] : item.title));
+      const en = dynamicEn.projects[index] || [];
+      article.append(make("div", "project-role", lang === "en" ? (en[0] || item.role) : item.role));
+      article.append(make("h3", "", lang === "en" ? (en[1] || item.title) : item.title));
       article.append(make("div", "project-year", item.year === "연도 미표기" ? t("missingYear") : item.year));
       return article;
     }));
@@ -246,12 +251,12 @@
       const article = make("article", "timeline-item");
       article.append(make("div", "timeline-date", lang === "en" ? item.date.replace("현재", "Present") : item.date));
       const body = make("div");
-      const en = dynamicEn[activeTimeline][index];
-      body.append(make("h3", "", lang === "en" ? en[0] : item.organization));
-      const note = lang === "en" ? en[2] : item.note;
+      const en = dynamicEn[activeTimeline][index] || [];
+      body.append(make("h3", "", lang === "en" ? (en[0] || item.organization) : item.organization));
+      const note = lang === "en" ? (en[2] || item.note) : item.note;
       if (note) body.append(make("p", "", note));
       article.append(body);
-      article.append(make("div", "timeline-role", lang === "en" ? en[1] : item.role));
+      article.append(make("div", "timeline-role", lang === "en" ? (en[1] || item.role) : item.role));
       return article;
     }));
   };
@@ -272,9 +277,9 @@
       const row = make("article", "compact-item");
       row.append(make("div", "compact-date", item.date));
       const body = make("div");
-      const en = dynamicEn[collection][index];
-      body.append(make("h4", "", lang === "en" ? en[0] : item.title));
-      body.append(make("p", "", lang === "en" ? en[1] : item.organization));
+      const en = dynamicEn[collection][index] || [];
+      body.append(make("h4", "", lang === "en" ? (en[0] || item.title) : item.title));
+      body.append(make("p", "", lang === "en" ? (en[1] || item.organization) : item.organization));
       row.append(body);
       return row;
     });
