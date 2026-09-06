@@ -18,6 +18,7 @@
       factPapers: "논문", papersUnit: "편", factYears: "연구 기간", factAffiliation: "소속", knue: "한국교원대학교",
       researchTitle: "연구 영역", researchBody: "교육과정의 구조를 읽고, 학습자의 삶과 교사의 실천을 연결합니다.", focus1Title: "가정과 교육과정", focus1Body: "교육과정·성취기준·교과서 분석과 미래 과목 설계", focus2Title: "교사 전문성", focus2Body: "교사 역량, 행위주체성, 수업 실행과 좋은 수업", focus3Title: "지속가능한 생활", focus3Body: "생태전환교육, 지속가능한 소비와 시민성", focus4Title: "수업과 평가", focus4Body: "실천적 문제해결, 프로그램 개발과 효과 검증",
       publicationsTitle: "논문", publicationsBody: "총 80편의 논문을 연도별로 확인하고 원문 또는 DOI 페이지로 이동할 수 있습니다. 제목과 초록은 파일에 수록된 언어로 제공합니다.", searchLabel: "논문 검색", searchPlaceholder: "제목, 저자, 학술지 검색", yearLabel: "연도 선택", allYears: "전체 연도", emptyPapers: "검색 조건에 맞는 논문이 없습니다.", morePapers: "목록 더 보기",
+      thesesTitle: "학위논문", thesesBody: "석사 및 박사 학위논문은 학술지 논문과 구분하여 제공합니다.", riss: "RISS 원문",
       projectsTitle: "연구 프로젝트", projectsBody: "교과서와 교육 콘텐츠 개발, 교원 역량 강화, 교육과정 운영을 연구 현장과 연결해 왔습니다.", experienceTitle: "학력과 경력", careerTab: "경력", educationTab: "학력", worksTitle: "수상과 저서", worksBody: "교육과 연구의 성과를 학술 공동체와 교육 현장에 확장해 왔습니다.", awardsTitle: "주요 수상", booksTitle: "저서·교과서",
       contactTitle: "연구와 교육에 관한 대화를 기다립니다.", contactAddress: "한국교원대학교 가정교육과\n충청북도 청주시 흥덕구 강내면 태성탑연로 250", backTop: "맨 위로",
       paperCount: (n) => `${n}편`, yearOption: (year) => `${year}년`, fullText: "원문", abstractToggle: "초록과 인용 정보", abstractKo: "국문 초록", abstractEn: "ENGLISH ABSTRACT", citation: "권장 인용", showAll: (n) => `전체 ${n}건 보기 ↓`, showLess: "간략히 보기 ↑", missingYear: "연도 미표기"
@@ -29,6 +30,7 @@
       factPapers: "Publications", papersUnit: " papers", factYears: "Research period", factAffiliation: "Affiliation", knue: "Korea National University of Education",
       researchTitle: "Research Focus", researchBody: "Connecting curriculum structures with learners' lives and teachers' practice.", focus1Title: "Home Economics Curriculum", focus1Body: "Curriculum, achievement standards, textbook analysis, and future course design", focus2Title: "Teacher Professionalism", focus2Body: "Teacher competency, agency, classroom practice, and good teaching", focus3Title: "Sustainable Living", focus3Body: "Ecological transition education, sustainable consumption, and citizenship", focus4Title: "Teaching & Assessment", focus4Body: "Practical problem solving, program development, and effectiveness studies",
       publicationsTitle: "Publications", publicationsBody: "Browse 80 publications by year and open the available full text or DOI page. Titles and abstracts appear in every language included in the source file.", searchLabel: "Search publications", searchPlaceholder: "Search title, author, or journal", yearLabel: "Select year", allYears: "All years", emptyPapers: "No publications match your search.", morePapers: "Load more",
+      thesesTitle: "Theses & Dissertations", thesesBody: "Master's and doctoral research is presented separately from journal publications.", riss: "View on RISS",
       projectsTitle: "Research Projects", projectsBody: "Connecting textbook and educational content development, teacher capacity building, and curriculum implementation with educational practice.", experienceTitle: "Education & Experience", careerTab: "Experience", educationTab: "Education", worksTitle: "Honors & Books", worksBody: "Extending the outcomes of teaching and research into academic communities and educational practice.", awardsTitle: "Selected Honors", booksTitle: "Books & Textbooks",
       contactTitle: "I welcome conversations about research and education.", contactAddress: "Department of Home Economics Education, KNUE\n250 Taeseongtabyeon-ro, Gangnae-myeon, Heungdeok-gu, Cheongju-si, Chungbuk 28173, Korea", backTop: "Back to top",
       paperCount: (n) => `${n} papers`, yearOption: (year) => String(year), fullText: "Full text", abstractToggle: "Abstracts & citation", abstractKo: "KOREAN ABSTRACT", abstractEn: "ENGLISH ABSTRACT", citation: "Preferred citation", showAll: (n) => `View all ${n} ↓`, showLess: "Show less ↑", missingYear: "Year not listed"
@@ -207,6 +209,24 @@
   yearSelect.addEventListener("change", resetPublications);
   moreButton.addEventListener("click", () => { visibleCount += 10; renderPublications(); });
 
+  const thesisList = by("[data-thesis-list]");
+  const renderTheses = () => {
+    thesisList.replaceChildren(...data.theses.map((item) => {
+      const article = make("article", "thesis-item");
+      const label = make("div", "thesis-label");
+      label.append(make("span", "", lang === "ko" ? item.degreeKo : item.degreeEn));
+      label.append(make("strong", "", String(item.year)));
+      article.append(label);
+      const body = make("div", "thesis-body");
+      body.append(make("h4", "", lang === "ko" ? item.title : item.titleEn));
+      body.append(make("p", "thesis-title-secondary", lang === "ko" ? item.titleEn : item.title));
+      body.append(make("p", "thesis-institution", lang === "ko" ? item.institutionKo : item.institutionEn));
+      article.append(body);
+      article.append(linkFor(item.url, t("riss"), "primary"));
+      return article;
+    }));
+  };
+
   const projectList = by("[data-project-list]");
   const renderProjects = () => {
     projectList.replaceChildren(...data.projects.map((item, index) => {
@@ -286,6 +306,7 @@
     });
     renderYearOptions();
     renderPublications();
+    renderTheses();
     renderProjects();
     renderTimeline();
     renderCompactList("awards");

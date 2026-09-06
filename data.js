@@ -1201,6 +1201,28 @@ window.SITE_DATA = {
       "sourceUrl": "https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=JAKO200211921064747"
     }
   ],
+  "theses": [
+    {
+      "degreeKo": "박사학위논문",
+      "degreeEn": "Doctoral Dissertation",
+      "year": 2006,
+      "title": "가정과교육의 미래 발전 전략 탐색 : 정체성과 임파워먼트 및 비전을 중심으로",
+      "titleEn": "A Study on Development Strategies for the Future Home Economics Education: Focusing on Identity, Empowerment, and Vision",
+      "institutionKo": "한국교원대학교 대학원",
+      "institutionEn": "Graduate School, Korea National University of Education",
+      "url": "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=be54d9b8bc7cdb09&control_no=a20fd857288b03a0ffe0bdc3ef48d419"
+    },
+    {
+      "degreeKo": "석사학위논문",
+      "degreeEn": "Master's Thesis",
+      "year": 2001,
+      "title": "ICT를 활용한 家政科 Web기반 문제해결학습환경의 개발 및 적용",
+      "titleEn": "Development and Application of a Web-Based Learning Environment for Problem Solving Using ICT in Home Economics Education",
+      "institutionKo": "한국교원대학교 대학원",
+      "institutionEn": "Graduate School, Korea National University of Education",
+      "url": "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=be54d9b8bc7cdb09&control_no=6382923ecb489c66"
+    }
+  ],
   "projects": [
     {
       "role": "연구책임자",

@@ -16,7 +16,7 @@ python -m http.server 8000
 
 - `index.html`: 페이지 구조, 소개 문구, 검색 노출 메타데이터
 - `styles.css`: 색상, 타이포그래피, 반응형 레이아웃
-- `data.js`: 한·영 논문 제목과 초록, 프로젝트, 경력, 학력, 수상, 저서 데이터
+- `data.js`: 한·영 논문 제목과 초록, 학위논문, 프로젝트, 경력, 학력, 수상, 저서 데이터
 - `script.js`: 한글·영문 전환, 논문 검색·연도 필터·초록 상세, 모바일 메뉴, 탭
 - `assets/park-mijeong-profile.jpg`: 대표 사진
 - `assets/knue-campus-main.jpg`: 첫 화면 학교 사진
